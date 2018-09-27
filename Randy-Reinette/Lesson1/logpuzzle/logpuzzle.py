@@ -27,23 +27,35 @@ def read_urls(filename):
 	f = open(filename)
 	url_list = []
 	urls = re.findall('(GET)\s(.*puzzle.*\.jpg)',f.read())
+	hostname = re.search('code.*',filename)
 	for url in urls:
-		full_url =  'http://' +filename+url[1]
+		full_url =  'http://' +hostname.group()+url[1]
 		if full_url not in url_list:
 			url_list.append(full_url)
 	return sorted(url_list)
   
 
 def download_images(img_urls, dest_dir):
-  """Given the urls already in the correct order, downloads
-  each image into the given directory.
-  Gives the images local filenames img0, img1, and so on.
-  Creates an index.html in the directory
-  with an img tag to show each local image file.
-  Creates the directory if necessary.
-  """
-  # +++your code here+++
-  
+	"""Given the urls already in the correct order, downloads
+	each image into the given directory.
+	Gives the images local filenames img0, img1, and so on.
+	Creates an index.html in the directory
+	with an img tag to show each local image file.
+	Creates the directory if necessary.
+	"""
+	num = 0
+	if not os.path.exists(dest_dir): 
+		os.mkdir(dest_dir)
+	index = open(dest_dir+"/index.html",'w+')
+	index.write("<html>\n<body>\n")
+	for img_url in img_urls:
+		img_name = "img" +str(num)
+		print img_name
+		print img_url	
+		img = urllib.urlretrieve(img_url, dest_dir + '/' + img_name)
+		num += 1
+		index.write("<img src="+ img_name + ">\n")
+	index.write("</body>\n</html>") 
 
 def main():
   args = sys.argv[1:]
