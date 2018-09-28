@@ -27,3 +27,17 @@ def get_share_count_for_page(page_url):
   return soup.find("span", class_= specific_class).text
 
 
+query = 'macron'
+page_url = "http://www.purepeople.com/article/brigitte-macron-decroche-une-jolie-couv-a-l-etranger_a306389/1"
+
+url_macron = get_all_links_for_query(query)
+share_count_test = get_share_count_for_page(page_url)
+
+class Lesson1Tests(unittest.TestCase):
+    def testShareCount(self):
+        self.assertEqual(get_share_count_for_page("http://www.purepeople.com/article/brigitte-macron-decroche-une-jolie-couv-a-l-etranger_a306389/1") , 86)
+
+
+
+def main():
+    unittest.main()
