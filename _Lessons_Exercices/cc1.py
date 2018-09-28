@@ -1,3 +1,4 @@
+# coding: utf-8
 import unittest
 
 
@@ -5,11 +6,15 @@ import unittest
 # that is n copies of the original string.
 
 def string_times(string, n):
-    return
+    return n * string
 
 # Given an array of ints, return True if one of the first 4 elements
 # in the array is a 9. The array length may be less than 4.
 def array_front9(nums):
+    for index, element in enumerate(nums):
+      if (index <= 3) and (element == 9):
+        return True
+    return False
     #longueur=min(len(nums) & 4)
     return
 
@@ -17,23 +22,38 @@ def array_front9(nums):
 # that a substring length 2 appears  in the string and also as
 # the last 2 chars of the string, so "hixxxhi" yields 1 (we won't count the end substring).
 def last2(string):
-    return
+    pattern = string[-2:]
+    count = 0
+    for i in range(0, len(string)-3):
+      substring = string[i:i+2]
+      if substring == pattern:
+        count += 1
+    return count
 
 #Write a proramm that returna dictionary of occurences of the alphabet for a given string.
 # Test it with the Lorem upsuj
 #"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 def occurences(text):
-  return
+
+  result = {}
+  lower_text = text.lower()
+  for character in lower_text:
+    if  character in result:
+      result[character] += 1
+    else:
+      result[character] = 1
+
+  return result
 
 #Write a program that maps a list of words into a list of
 #integers representing the lengths of the correponding words.
 def length_words(array):
-    return
+    return map(len, array)
 
 
 #Write a function that takes a number and returns a list of its digits.
 def number2digits(number):
-  return
+  return [int(z) for z in str(number)]
 
 #Write function that translates a text to Pig Latin and back.
 #English is translated to Pig Latin by taking the first letter of every word,
@@ -49,7 +69,7 @@ def fizbuzz():
 
 response = {
   "nhits": 1000,
-  "parameters": {}
+  "parameters": {},
   "records": [
     {
       "datasetid": "les-1000-titres-les-plus-reserves-dans-les-bibliotheques-de-pret",
@@ -58,9 +78,9 @@ response = {
         "nombre_de_reservations": 1094,
         "url_de_la_fiche_de_l_oeuvre": "https://bibliotheques.paris.fr/Default/doc/SYRACUSE/1009613",
         "url_de_la_fiche_de_l_auteur": "https://bibliotheques.paris.fr/Default/doc/SYRACUSE/1009613",
-        "support": "indéterminé",
+        "support": "indterminé",
         "auteur": "Enders, Giulia",
-        "titre": "Le charme discret de l'intestin [Texte imprimé] : tout sur un organe mal aimé"
+        "titre": "Le charme discret de l'intestin [Texte imprim] : tout sur un organe mal aim"
       },
       "record_timestamp": "2017-01-26T11:17:33+00:00"
     },
@@ -71,9 +91,9 @@ response = {
         "nombre_de_reservations":746,
         "url_de_la_fiche_de_l_oeuvre":"https://bibliotheques.paris.fr/Default/doc/SYRACUSE/1016593",
         "url_de_la_fiche_de_l_auteur":"https://bibliotheques.paris.fr/Default/doc/SYRACUSE/1016593",
-        "support":"Bande dessinée pour adulte",
+        "support":"Bande dessine pour adulte",
         "auteur":"Sattouf, Riad",
-        "titre":"L'Arabe du futur [Texte imprimé]. 2. Une jeunesse au Moyen-Orient, 1984-1985"
+        "titre":"L'Arabe du futur [Texte imprim]. 2. Une jeunesse au Moyen-Orient, 1984-1985"
       },
       "record_timestamp":"2017-01-26T11:17:33+00:00"
     },
@@ -82,7 +102,15 @@ response = {
 
 #Given the above response object extract a array of records with columns nombre_de_reservations , auteur and timestamp
 def flatten():
-    return
+    results = []
+    for record in response['records']:
+      computed_record = {}
+      computed_record['timestamp'] = record['record_timestamp']
+      computed_record['auteur'] = record['fields']['auteur']
+      computed_record['nombre_de_reservations'] = record['fields']['nombre_de_reservations']
+      results.append(computed_record)
+
+    return results
 
 
 
