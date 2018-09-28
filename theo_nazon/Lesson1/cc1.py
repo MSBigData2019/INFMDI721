@@ -5,45 +5,84 @@ import unittest
 # that is n copies of the original string.
 
 def string_times(string, n):
-    return
+    return string * n
 
 # Given an array of ints, return True if one of the first 4 elements
 # in the array is a 9. The array length may be less than 4.
 def array_front9(nums):
-    #longueur=min(len(nums) & 4)
-    return
+    result = False
+    length = min(len(nums), 4)
+    for i in range(length):
+        if nums[i] == 9:
+            result = True
+            break
+    return result
 
 # Given a string, return the count of the number of times
 # that a substring length 2 appears  in the string and also as
 # the last 2 chars of the string, so "hixxxhi" yields 1 (we won't count the end substring).
 def last2(string):
+
     return
 
 #Write a proramm that returna dictionary of occurences of the alphabet for a given string.
 # Test it with the Lorem upsuj
-#"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+# text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 def occurences(text):
-  return
+    result_dict = {}
+    for i in text:
+        if i in result_dict.keys():
+            result_dict[i] += 1
+        else:
+            result_dict[i] = 1
+    return result_dict
+
+# print(occurences(text))
 
 #Write a program that maps a list of words into a list of
 #integers representing the lengths of the correponding words.
 def length_words(array):
-    return
+    result_dict = {}
+    for word in array:
+        lenght = len(word)
+        if length in result_dict.keys():
+            result_dict[length] = [word]
+        else:
+            result_dict[length].append(word)
+    return result_dict
 
 
 #Write a function that takes a number and returns a list of its digits.
 def number2digits(number):
-  return
+    result = [int(digit) for digit in str(number)]
+    return result
+
 
 #Write function that translates a text to Pig Latin and back.
 #English is translated to Pig Latin by taking the first letter of every word,
 #moving it to the end of the word and adding 'ay'
 def pigLatin(text):
-  return
+    text_list = text.split(" ")
+
+    return
 
 
 #write fizbuzz programm
+# Write a program that prints the numbers from 1 to 100. But for multiples of three print “Fizz” instead of the number
+# and for the multiples of five print “Buzz”. For numbers which are multiples of both three and five print “FizzBuzz”."
 def fizbuzz():
+    for number in range(100):
+        if number % 15 == 0:
+            print("FizzBuzz")
+
+        elif number % 3 == 0:
+            print("Fizz")
+
+        elif number % 5 == 0:
+            print("Buzz")
+
+        else:
+            print(number)
     return
 
 
@@ -81,9 +120,15 @@ response = {
 }
 
 #Given the above response object extract a array of records with columns nombre_de_reservations , auteur and timestamp
+import json
 def flatten():
-    return
-
+    parsed_json = json.loads(response)
+    result_array = []
+    record_1 = parsed_json[records][0]
+    record_2 = parsed_json[records][1]
+    result_array = [record_1["nombre_de_reservations"], record_1["fields"]["auteur"], record_1["record_timestamp"]]
+    result_array.append([record_2["nombre_de_reservations"], record_2["fields"]["auteur"], record_2["record_timestamp"]])
+    return result_array
 
 
 # Here's our "unit tests".
